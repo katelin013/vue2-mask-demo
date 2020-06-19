@@ -1,24 +1,19 @@
-# mask-map-demo
+# Vue 練習-口罩地圖
 
-## Project setup
-```
-yarn install
-```
+練習用 Vue 做一個地圖
+-------
+參考5倍的文章練習&修改
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+用到的第三方
+-------
+bootStrap : npm install bootstrap
 
-### Compiles and minifies for production
-```
-yarn build
-```
+axios : npm install --save axios vue-axios
 
-### Lints and fixes files
-```
-yarn lint
-```
+leaft : npm install leaft
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+OpenStreetMap
+
+[各縣市資料診所資訊](https://github.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/blob/master/CityCountyData.json)
+
+
