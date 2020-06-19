@@ -53,8 +53,10 @@ export default {
   data: () => ({
     data:[],
     cityName,
+    latitude : 25.047445,
+    longitude: 121.513975,
     select: {
-      city: '台北市',
+      city: '臺北市',
       area: ''
     },
   }),
@@ -67,7 +69,7 @@ export default {
     })
 
     // 設定預設位置
-    openStreetMap = leaflet.map('map').setView([25.047445, 121.513975], 19);
+    openStreetMap = leaflet.map('map').setView([this.latitude, this.longitude], 19);
 
     // tileLayer 方法主要是對疊加在地圖上的操作進行設定
     leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -81,15 +83,19 @@ export default {
       // 透過 filter 找到相對應的縣市/區域
       return this.data.filter((pharamacy) => {
         if(!this.select.area){
-          return pharamacy.properties.country === this.select.city;
+          return pharamacy.properties.county === this.select.city;
         }
         return pharamacy.properties.town === this.select.area;
       })
     }
   },
   watch: {
+    // 監聽 pharmacies 的變化
     pharmacies(){
       this.updateMap();
+    },
+    'select.area':function(){
+      // openStreetMap.panTo([this.latitude, this.longitude]).setZoom(17)
     }
   },
   methods: {
@@ -101,13 +107,7 @@ export default {
       })
 
       this.pharmacies.forEach((pharmacy) => {
-        leaflet.marker([
-          pharmacy.geometry.coordinates[1],
-          pharmacy.geometry.coordinates[0],
-        ]).addTo(openStreetMap);
-      })
-
-      this.pharmacies.forEach((pharmacy) => {
+        console.log(pharmacy)
         leaflet.marker([
           pharmacy.geometry.coordinates[1],
           pharmacy.geometry.coordinates[0],
@@ -119,7 +119,7 @@ export default {
           <small>最後更新時間: ${pharmacy.properties.updated}</small>
           `);
       });
-    }
+    },
   }
 }
 </script>
